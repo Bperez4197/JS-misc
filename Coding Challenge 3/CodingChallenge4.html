@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+      var tips = [];
+      var totals = [];
+
+      for (let i = 0; i < bills.length; i++) {
+        let tip = bills[i] * 0.2;
+        tips.push(tip);
+        totals.push(bills[i] + tip);
+      }
+
+      function calcAverage(arr) {
+        total = 0;
+        for (let i = 0; i < arr.length; i++) {
+          total += arr[i];
+        }
+        var average = total / arr.length;
+        return average;
+      }
+
+      const temperatures = [3, -2, -6, -1, "error", 9, 13, 17, 15, 14, 9, 5];
+      //temperature amplitude? difference between highest and lowest.
+      function calcTempAmplitude(arr1, arr2) {
+        arr1 = arr1.concat(arr2);
+        var highest = arr1[0];
+        var lowest = arr1[0];
+        for (let i = 0; i < arr1.length; i++) {
+          if (typeof arr1[i] == "number") {
+            if (arr1[i] > highest) {
+              highest = arr1[i];
+            }
+            if (arr1[i] < lowest) {
+              lowest = arr1[i];
+            }
+          }
+        }
+        return highest - lowest;
+      }
+
+      console.log(calcTempAmplitude(temperatures, [1, 2, 3]));
+    </script>
+  </head>
+  <body></body>
+</html>

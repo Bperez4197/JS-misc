@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      function Person(firstName, lastName, mass, height) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.height = height;
+        this.mass = mass;
+        this.fullName = `${this.firstName} ${lastName}`;
+        var bmi;
+
+        this.calcBMI = function () {
+          this.bmi = this.mass / this.height ** 2;
+          this.bmi = this.bmi.toFixed(2);
+          return this.bmi;
+        };
+      }
+
+      var john = new Person("John", "Smith", 92, 1.95);
+      var mark = new Person("Mark", "Miller", 78, 1.69);
+
+      console.log(john);
+      john.calcBMI();
+      mark.calcBMI();
+      console.log(mark);
+
+      john.bmi > mark.bmi
+        ? document.writeln(
+            `${john.firstName}'s BMI (${john.bmi}) is higher than ${mark.firstName}'s (${mark.bmi})!`
+          )
+        : document.writeln(
+            `${mark.firstName}'s BMI (${mark.bmi}) is higher than ${john.firstName}'s (${john.bmi})!`
+          );
+    </script>
+  </head>
+  <body></body>
+</html>

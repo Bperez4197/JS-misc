@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 80%;
+        margin: 0 auto;
+        background-color: aqua;
+        height: 2080px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        padding-top: 15px;
+      }
+      header {
+        /* position: sticky;
+        top: 0;
+        background-color: aquamarine; */
+        border-bottom: 3px solid #eee;
+        margin-bottom: 5px;
+      }
+
+      ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+      }
+
+      li {
+        list-style-type: none;
+        margin: 5px;
+        color: rgba(255, 255, 255, 0.897);
+        padding: 5px;
+        text-shadow: 1px 1px 1px gray;
+      }
+
+      p {
+        width: 66.6%;
+      }
+
+      img {
+        width: 33.3%;
+        float: right;
+      }
+    </style>
+
+    <script>
+      //   var testCase = [17, 21, 23];
+      //   var testCaseTwo = [12, 5, -5, 0, 4];
+      //   function printForecast(weatherArray) {
+      //     var finalString = "... ";
+      //     for (let i = 0; i < weatherArray.length; i++) {
+      //       finalString += `${weatherArray[i]} in ${i + 1} days... `;
+      //     }
+
+      //     return finalString;
+      //   }
+
+      //   console.log(printForecast(testCase));
+      //   console.log(printForecast(testCaseTwo));
+
+      // const and let are block scoped by var is function scoped///////////////////////////////////////////
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Whats really good?</h1>
+      <nav>
+        <ul>
+          <li>Home</li>
+          <li>Contact</li>
+          <li>About</li>
+          <li>Work</li>
+        </ul>
+      </nav>
+    </header>
+
+    <img
+      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.r-R_myhZSYzsPqvMaz7k0AHaJ3%26pid%3DApi&f=1"
+    />
+    <p id="main-content">
+      You know what it is dog. You know what it is dog.You know what it is
+      dog.You know what it is dog.You know what it is dog.You know what it is
+      dog.You know what it is dog.You know what it is dog.You know what it is
+      dog.You know what it is dog.You know what it is dog.You know what it is
+      dog.You know what it is dog.You know what it is dog.You know what it is
+      dog.You know what it is dog.You know what it is dog.
+    </p>
+    <form id="myForm">
+      <label for="userInput">Please enter your name: </label>
+      <input type="text" name="userInput" id="userInput" />
+      <input type="button" name="submit" id="submit" value="Submit" />
+    </form>
+  </body>
+  <script>
+    let paragraph = document.querySelector("#main-content");
+    let image = document.querySelector("img");
+
+    let btn = document.querySelector("#submit");
+    btn.addEventListener("click", function () {
+      let userInput = document.querySelector("#userInput");
+      paragraph.textContent = userInput.value;
+      image.src =
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.fCPZfFwukavZNxRcgUIsEQHaNK%26pid%3DApi&f=1";
+    });
+  </script>
+</html>

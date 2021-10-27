@@ -1,0 +1,27 @@
+<script>
+  var greeting = "Hello, please selected the type tour.";
+  console.log(greeting);
+
+  // function palindrome(word) {
+  //     let wordReversed = word.split('').reverse().join('');
+  //     if(word == wordReversed){
+  //         console.log( word + " is a palindrome!")
+  //     }else {
+  //         console.log(word + " is not a palindrome, it spells " + wordReversed)
+  //     }
+  // }
+
+  function palindrome(word) {
+    let wordReversed = word.split("").reverse().join("");
+    word == wordReversed
+      ? console.log(word + " is a palindrome!")
+      : console.log(word + " is not a palindrome, it spells " + wordReversed);
+  }
+  palindrome("racecar");
+  palindrome("funTimes");
+  palindrome("Bryce");
+  palindrome("Murder");
+  palindrome("mom");
+  palindrome("dad");
+  palindrome("look");
+</script>
