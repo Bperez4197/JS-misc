@@ -64,5 +64,48 @@ greeterHey("Steven");
 greet("Hello")("Bryce");
 
 //Call and Apply Methods
+const lufthansa = {
+  airline: "Lufthansa",
+  iataCode: "LH",
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, "Bryce Perez");
+lufthansa.book(635, "John Smith");
+console.log(lufthansa.bookings);
+
+const eurowings = {
+  airline: "Eurowings",
+  iataCode: "EW",
+  bookings: [],
+};
+
+const book = lufthansa.book;
+//this does not work because the "this" from the original function now points to undefined unstead of eurowings
+//book(23, "Sara Williams");
+
+//CALL
+//call tells book what "this" should point to and then the arguments of the original function
+book.call(eurowings, 23, "Sara Williams");
+console.log(eurowings);
+
+book.call(lufthansa, 123, "Joe Montana");
+console.log(lufthansa);
+
+//APPLY
+//apply works like call but instead of passing in the individual arguments for the original function
+//you pass in an array of arguments.
+//not used much in modern javascript, use call and destructure arguments.
+
+const flightData = [583, "George Cooper"];
+book.apply(eurowings, flightData);
+
+book.call(lufthansa, ...flightData);
 
 //The bind method

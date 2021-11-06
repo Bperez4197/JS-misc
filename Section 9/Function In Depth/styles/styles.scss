@@ -1,0 +1,36 @@
+//can import from other .scss files but they should be name with an _underscore.scss
+//on this file @import './file'
+
+//mixins are like functions for css
+@mixin flexCenter($direction, $background) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+  background: $background;
+}
+
+$primaryColor: rgb(74, 61, 129);
+$primaryLight: rgb(255, 255, 255);
+
+body {
+  @include flexCenter(column, $primaryColor);
+  height: 100vh;
+  width: 100vw;
+  div {
+    @include flexCenter(row, $primaryLight);
+    height: 30%;
+    width: 90%;
+    &:hover {
+      @include flexCenter(column, $primaryColor);
+    }
+  }
+}
+
+//can extend styles
+.contact {
+  @extend div;
+  border: 1px solid black;
+}
+
+//can use operators for calculations like width: 1080px / 900px;
