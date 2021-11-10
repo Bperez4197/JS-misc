@@ -61,6 +61,25 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
+const displayMovements = function (movements) {
+  containerMovements.innerHtml = "";
+
+  movements.forEach((movement, index) => {
+    const type = movement > 0 ? "deposit" : "withdrawal";
+    const html = `
+    <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      index + 1
+    } ${type}</div>
+        <div class="movements__value">${movement}</div>
+     </div>
+    `;
+    containerMovements.insertAdjacentHTML("afterbegin", html);
+  });
+};
+
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -122,14 +141,14 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //     : console.log(`Movement ${index + 1} you withdrew ${Math.abs(num)}`)
 // );
 
-//FOR EACH FOR MAPS AND SETS
-currencies.forEach((value, key, map) => {
-  console.log(`${key}: ${value}`);
-});
+// //FOR EACH FOR MAPS AND SETS
+// currencies.forEach((value, key, map) => {
+//   console.log(`${key}: ${value}`);
+// });
 
-const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
+// const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
 
-//NO POINT IN KEYS BECAUSE SETS DONT HAVE KEYS OR INDEXES
-currenciesUnique.forEach((value, _, set) => {
-  console.log(`${value}: ${value}`);
-});
+// //NO POINT IN KEYS BECAUSE SETS DONT HAVE KEYS OR INDEXES
+// currenciesUnique.forEach((value, _, set) => {
+//   console.log(`${value}: ${value}`);
+// });
