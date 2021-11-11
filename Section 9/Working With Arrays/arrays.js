@@ -81,9 +81,26 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
-displayMovements(account2.movements);
-displayMovements(account3.movements);
-displayMovements(account4.movements);
+
+const calcPrintBalance = (movements) => {
+  const balance = movements.reduce((acc, curr) => acc + curr, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcPrintBalance(account1.movements);
+
+const createUsernames = (accs) => {
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+
+createUsernames(accounts);
+// console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -157,3 +174,47 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // currenciesUnique.forEach((value, _, set) => {
 //   console.log(`${value}: ${value}`);
 // });
+
+// //MAP
+// //////////////////////////////////////
+// const euroToUsd = 1.1;
+
+// const movementsUsd = movements.map((mov) => Math.floor(mov * euroToUsd));
+
+// console.log(movementsUsd);
+
+// const movementsDescriptions = movements.map((mov, index) => {
+//   return `Movement ${index + 1} You ${
+//     mov > 0 ? "deposited" : "withdrew"
+//   } ${Math.abs(mov)}`;
+// });
+
+// console.log(movementsDescriptions);
+
+// //FILTER
+// ////////////////////////////////
+
+// const deposits = movements.filter((mov) => {
+//   return mov > 0;
+// });
+// console.log(deposits);
+
+// const withrawals = movements.filter((move) => move < 0);
+// console.log(withrawals);
+
+// //REDUCE
+// ///////////////////////////////////////
+// // .reduce(accumulator, current, index, arr){}, inital value of accumulator
+// const balance = movements.reduce((total, mov) => {
+//   return total + mov;
+// }, 0);
+
+// console.log(balance);
+
+// //MAXIMUM VALUE
+// const maxValue = movements.reduce(
+//   (max, mov) => (max > mov ? max : mov),
+//   movements[0]
+// );
+
+// console.log(maxValue);
