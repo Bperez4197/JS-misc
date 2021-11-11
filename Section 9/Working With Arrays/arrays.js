@@ -61,6 +61,8 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
+/////////////////////////////////////////////////////////////
+//DOM MANIPULATION
 const displayMovements = function (movements) {
   containerMovements.innerHtml = "";
 
@@ -79,6 +81,9 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+displayMovements(account2.movements);
+displayMovements(account3.movements);
+displayMovements(account4.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
