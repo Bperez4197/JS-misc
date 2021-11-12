@@ -244,14 +244,26 @@ const euroToUsd = 1.1;
 
 //METHOD CHAINING MAGIC
 ///////////////////////////////////////////////
-const totalDepositsUsd = movements
-  .filter((mov) => mov > 0)
-  //by using the third parameter, the arr, we are able to access the array that was passed to the map method which is useful for debugging because we can see the result of each chained method if we need to.
-  // .map((mov, index, arr) => {
-  //   console.log(arr);
-  //   return mov * euroToUsd;
-  // })
-  .map((mov) => mov * euroToUsd)
-  .reduce((total, mov) => total + mov, 0);
+// const totalDepositsUsd = movements
+//   .filter((mov) => mov > 0)
+//   //by using the third parameter, the arr, we are able to access the array that was passed to the map method which is useful for debugging because we can see the result of each chained method if we need to.
+//   // .map((mov, index, arr) => {
+//   //   console.log(arr);
+//   //   return mov * euroToUsd;
+//   // })
+//   .map((mov) => mov * euroToUsd)
+//   .reduce((total, mov) => total + mov, 0);
 
-console.log(Math.round(totalDepositsUsd));
+// console.log(Math.round(totalDepositsUsd));
+
+// FIND
+//BOOLEAN LIKE A FILTER METHOD. RETURNS THE FIRST ELEMENT IN THE ARRAY THAT PASSES OUR CONDITIONAL STATEMENT
+//ONLY RETURNS ELEMENTS, NOT AN ARRAY
+//////////////////////////////
+const firstWidthdrawal = movements.find((mov) => mov < 0);
+console.log(firstWidthdrawal);
+
+console.log(accounts);
+
+const account = accounts.find((acc) => acc.owner == "Jessica Davis");
+console.log(account);
