@@ -87,6 +87,29 @@ const calcPrintBalance = (movements) => {
   labelBalance.textContent = `${balance} EUR`;
 };
 
+const calcDisplaySummary = (movements) => {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((total, mov) => total + mov, 0);
+
+  labelSumIn.textContent = `${incomes}$`;
+
+  const expenses = movements
+    .filter((mov) => mov < 0)
+    .reduce((total, mov) => total + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(expenses)}$`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((mov) => (mov * 1.2) / 100)
+    .filter((mov) => mov >= 1)
+    .reduce((total, mov) => total + mov, 0);
+
+  labelSumInterest.textContent = `${interest}$`;
+};
+
+calcDisplaySummary(account1.movements);
 calcPrintBalance(account1.movements);
 
 const createUsernames = (accs) => {
@@ -177,7 +200,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // //MAP
 // //////////////////////////////////////
-// const euroToUsd = 1.1;
+const euroToUsd = 1.1;
 
 // const movementsUsd = movements.map((mov) => Math.floor(mov * euroToUsd));
 
@@ -218,3 +241,17 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // );
 
 // console.log(maxValue);
+
+//METHOD CHAINING MAGIC
+///////////////////////////////////////////////
+const totalDepositsUsd = movements
+  .filter((mov) => mov > 0)
+  //by using the third parameter, the arr, we are able to access the array that was passed to the map method which is useful for debugging because we can see the result of each chained method if we need to.
+  // .map((mov, index, arr) => {
+  //   console.log(arr);
+  //   return mov * euroToUsd;
+  // })
+  .map((mov) => mov * euroToUsd)
+  .reduce((total, mov) => total + mov, 0);
+
+console.log(Math.round(totalDepositsUsd));
