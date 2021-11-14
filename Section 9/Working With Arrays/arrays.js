@@ -80,21 +80,19 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 const calcPrintBalance = (movements) => {
   const balance = movements.reduce((acc, curr) => acc + curr, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
 
-const calcDisplaySummary = (movements) => {
-  const incomes = movements
+const calcDisplaySummary = (acc) => {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((total, mov) => total + mov, 0);
 
   labelSumIn.textContent = `${incomes}$`;
 
-  const expenses = movements
+  const expenses = acc.movements
     .filter((mov) => mov < 0)
     .reduce((total, mov) => total + mov, 0);
 
@@ -102,15 +100,12 @@ const calcDisplaySummary = (movements) => {
 
   const interest = movements
     .filter((mov) => mov > 0)
-    .map((mov) => (mov * 1.2) / 100)
+    .map((mov) => (mov * acc.interestRate) / 100)
     .filter((mov) => mov >= 1)
     .reduce((total, mov) => total + mov, 0);
 
   labelSumInterest.textContent = `${interest}$`;
 };
-
-calcDisplaySummary(account1.movements);
-calcPrintBalance(account1.movements);
 
 const createUsernames = (accs) => {
   accs.forEach((acc) => {
@@ -124,6 +119,32 @@ const createUsernames = (accs) => {
 
 createUsernames(accounts);
 // console.log(accounts);
+
+// EVENT HANDLERS
+///////////////////////////////////
+let currentAccount;
+
+btnLogin.addEventListener("click", (event) => {
+  //prevent form from submitting
+  event.preventDefault();
+
+  currentAccount = accounts.find(
+    (account) => account.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //display ui and a welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = "";
+    inputLoginPin.blur();
+    displayMovements(currentAccount.movements);
+    calcPrintBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -260,10 +281,10 @@ const euroToUsd = 1.1;
 //BOOLEAN LIKE A FILTER METHOD. RETURNS THE FIRST ELEMENT IN THE ARRAY THAT PASSES OUR CONDITIONAL STATEMENT
 //ONLY RETURNS ELEMENTS, NOT AN ARRAY
 //////////////////////////////
-const firstWidthdrawal = movements.find((mov) => mov < 0);
-console.log(firstWidthdrawal);
+// const firstWidthdrawal = movements.find((mov) => mov < 0);
+// console.log(firstWidthdrawal);
 
-console.log(accounts);
+// console.log(accounts);
 
-const account = accounts.find((acc) => acc.owner == "Jessica Davis");
-console.log(account);
+// const account = accounts.find((acc) => acc.owner == "Jessica Davis");
+// console.log(account);
