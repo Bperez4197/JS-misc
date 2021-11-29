@@ -371,3 +371,40 @@ const euroToUsd = 1.1;
 // // returns true if all elements pass the conditional
 // const deposits = (mov) => mov > 0;
 // console.log(account4.movements.every(deposits));
+
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+
+// //FLAT
+// // returns a single array with no nested arrays.
+// console.log(arr.flat());
+// //returns: [1, 2, 3, 4, 5, 6, 7, 8];
+// console.log(arrDeep.flat());
+// //returns: [[1,2], 3, 4, [5,6], 7, 8]; so flat on flattens one level of nesting by default
+// console.log(arrDeep.flat(2));
+// // returns: [1, 2, 3, 4, 5, 6, 7, 8]; because the 2 argument tells it to flatten two level deep
+
+// const accountMovements = accounts.map((acc) => acc.movements);
+// console.log(accountMovements);
+
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// const chainedOverallBalance = accounts
+//   .map((acc) => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(chainedOverallBalance);
+
+// //FLAT MAP
+// // COMBINES A FLAT AND MAP METHOD BECAUSE IT IS COMMON TO HAVE TO CHAIN THESE
+// //can only go one level deep due to map needing a callback function so if more than one level of denesting is needed use flat and map serparately
+
+// const chainedOverallBalance2 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(chainedOverallBalance2);
