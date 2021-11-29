@@ -63,10 +63,12 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 /////////////////////////////////////////////////////////////
 //DOM MANIPULATION
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHtml = "";
 
-  movements.forEach((movement, index) => {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((movement, index) => {
     const type = movement > 0 ? "deposit" : "withdrawal";
     const html = `
     <div class="movements__row">
@@ -213,6 +215,13 @@ btnClose.addEventListener("click", function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = "";
+});
+
+let sorted = false;
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -408,3 +417,27 @@ const euroToUsd = 1.1;
 //   .reduce((acc, mov) => acc + mov, 0);
 
 // console.log(chainedOverallBalance2);
+
+/////////////////////////////////////////SORTING ARRAYS/////////////////////////////////////
+
+//strings
+// const owners = ["Jonas", "Zach", "Adam", "Martha"];
+
+// //the sort method alters the original array and converts elements to a string which is why the numbers result is funky
+// console.log(owners.sort());
+
+// // Numbers
+// console.log(movements);
+// console.log(movements.sort()); //doesnt work
+
+// //ASCENDING ORDER////////////////////////////////////////////////////
+// // return < 0, A, B (keep order)
+// // return > 0, B, A (switch order)
+// const correctNumberSort = movements.sort((a, b) => a - b);
+
+// // DESCENDING ORDER////////////////////////////////////
+
+// const correctNumberSort2 = movements.sort((a, b) => b - a);
+
+// // console.log(correctNumberSort);
+// console.log(correctNumberSort2);
