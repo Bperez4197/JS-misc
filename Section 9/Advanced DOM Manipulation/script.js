@@ -99,6 +99,7 @@ const handleHover = function (e) {
   }
 };
 
+// an anonymous function to call your function with args
 // nav.addEventListener("mouseover", function (e) {
 //   handleHover(e, 0.5);
 // });
@@ -106,6 +107,45 @@ const handleHover = function (e) {
 nav.addEventListener("mouseover", handleHover.bind(0.5));
 
 nav.addEventListener("mouseout", handleHover.bind(1));
+
+//// Sticky Navigation ////////////////////////////////////////////////////
+// const initialCoords = section1.getBoundingClientRect();
+
+// window.addEventListener("scroll", function () {
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add("sticky");
+//   } else {
+//     nav.classList.remove("sticky");
+//   }
+// });
+/// THE ABOVE METHOD WORKS BUT CONSTANTLY FIRES SCROLL EVENTS SO A BETTER PERFORMING SOLUTION IS NECESSARY
+// Sticky Navigation: Intersection Observer API
+// const observerCallback = function (entries, observer) {
+//   entries.forEach((entry) => console.log(entry));
+// };
+
+// const obsOptions = {
+//   root: null,
+//   threshold: [0,0.2],
+// };
+
+// const observer = new IntersectionObserver(observerCallback, obsOptions);
+// observer.observe(section1);
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+};
+
+const header = document.querySelector(".header");
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`, //height of nav
+});
+headerObserver.observe(header);
 
 /////////////////Smooth Scroll///////////////////////////////////////////////
 
@@ -143,7 +183,7 @@ btnScrollTo.addEventListener("click", function (e) {
 // console.log(document.head);
 // console.log(document.body);
 
-const header = document.querySelector(".header");
+// const header = document.querySelector(".header");
 const allSections = document.querySelectorAll(".section");
 
 // console.log(allSections);
@@ -167,16 +207,18 @@ message.innerHTML =
 // header.append(message);
 // header.append(message.cloneNode(true)); // If I want a dom node to be in two places at once I must clone it like this
 
-header.before(message);
+////// Cookie Message before header///////////////////////////////////////////////////
+// header.before(message);
 // header.after(message);
 
 // Delete elements///////////////////////////////////////////////
-document
-  .querySelector(".btn--close-cookie")
-  .addEventListener("click", function () {
-    // message.remove();
-    message.parentElement.removeChild(message);
-  });
+/// Make the cookie message go away on click //////////////////////////////
+// document
+//   .querySelector(".btn--close-cookie")
+//   .addEventListener("click", function () {
+//     // message.remove();
+//     message.parentElement.removeChild(message);
+//   });
 
 // Styles ///////////////////////////////////////
 message.style.backgroundColor = "#37383d";
