@@ -56,3 +56,29 @@ Person.prototype.species = "Homo Sapiens";
 
 // const h1 = document.querySelector("h1");
 // console.dir(h1);
+
+////////////////////////// ES6 CLASSES /////////////////////////////////////////////////// //
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  //METHODS WRITTEN OUTSIDE THE CONSTRUCTOR ARE AUTOMATICALLY WRITTEN TO THE .PROTOTYPE////////////
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+const jessica = new PersonCl("Jessica", 1996);
+console.log(jessica);
+jessica.calcAge();
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+PersonCl.prototype.greet = function () {
+  console.log(`Hey ${this.firstName}!`);
+};
+
+jessica.greet();
