@@ -473,3 +473,19 @@ const link = document.querySelector(".nav__link--btn");
 //     el.style.transform = "scale(0.5)";
 //   }
 // });
+
+//////////////Lifecycle DOM Events //////////////////////////////
+
+// document.addEventListener("DOMContentLoaded", function (e) {
+//   // console.log(e);
+// });
+
+// window.addEventListener("load", function (e) {
+//   console.log("page fully loaded", e);
+// });
+
+// window.addEventListener("beforeunload", function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = "";
+// });
