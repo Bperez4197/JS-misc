@@ -190,3 +190,34 @@ const mike = new Student("Mike", 2020, "Computer Science");
 // console.dir(Student.prototype.constructor);
 Student.prototype.constructor = Student;
 // console.dir(Student.prototype.constructor);
+
+// Inheritance with classes //////////////////////////////////////////////////////////////////////////////////////////////////
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    //Always needs to happen first -- duh
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+// const martha = new StudentCl("Martha Jones", 2012);
+// console.log(martha);
+const martha = new StudentCl("Martha Jones", 2012, "Computer Science");
+console.log(martha);
+martha.introduce();
+martha.calcAge();
