@@ -25,6 +25,14 @@ const jack = new Person("Jack", 1975);
 
 // console.log(bryce instanceof Person);
 
+Person.hey = function () {
+  console.log("Hey there");
+  console.log(this);
+};
+
+// Person.hey();
+// bryce.hey(); // doesn't work
+
 /// PROTOTYPES //////////////////////////////////////////////////////////////////////////////////////////////////
 //This is how to add methods and one way to add properties
 // console.log(Person.prototype);
@@ -84,7 +92,15 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  // static method //////////////////
+  static hey() {
+    console.log("Hey there");
+    console.log(this);
+  }
 }
+
+// PersonCl.hey();
 
 const jessica = new PersonCl("Jessica Davis", 1996);
 // console.log(jessica);
@@ -97,7 +113,7 @@ PersonCl.prototype.greet = function () {
   console.log(`Hey ${this.fullName}!`);
 };
 
-jessica.greet();
+// jessica.greet();
 
 //1. Classes are NOT hoisted which means we cant use them before they're declared
 //2. classes are first-class citizens which means we can pass them to functions and return them from functions
@@ -124,3 +140,27 @@ console.log(account.latest);
 account.latest = 50;
 
 console.log(account.movements);
+
+/////////////////////////OBJECT.CREATE()//////////////////////////////////
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = "Steven";
+steven.birthYear = 2002;
+console.log(steven.calcAge());
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init("Sarah", 1979);
+sarah.calcAge();
