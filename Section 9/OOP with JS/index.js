@@ -135,11 +135,11 @@ const account = {
   },
 };
 
-console.log(account.latest);
+// console.log(account.latest);
 
 account.latest = 50;
 
-console.log(account.movements);
+// console.log(account.movements);
 
 /////////////////////////OBJECT.CREATE()//////////////////////////////////
 const PersonProto = {
@@ -154,13 +154,39 @@ const PersonProto = {
 };
 
 const steven = Object.create(PersonProto);
-console.log(steven);
+// console.log(steven);
 steven.name = "Steven";
 steven.birthYear = 2002;
-console.log(steven.calcAge());
+// console.log(steven.calcAge());
 
-console.log(steven.__proto__ === PersonProto);
+// console.log(steven.__proto__ === PersonProto);
 
 const sarah = Object.create(PersonProto);
-sarah.init("Sarah", 1979);
-sarah.calcAge();
+// sarah.init("Sarah", 1979);
+// sarah.calcAge();
+
+////////////////////////////////////////////////INHERITANCE//////////////////////////////////////////////
+
+// INHERITANCE WITH FUNCTION expression "classes"/constructors
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+//Linking prototypes
+// this must be declared before adding any prototype methods because Object.create returns an empty object
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+};
+
+const mike = new Student("Mike", 2020, "Computer Science");
+// mike.introduce();
+// mike.calcAge();
+
+// console.log(mike.__proto__);
+// console.dir(Student.prototype.constructor);
+Student.prototype.constructor = Student;
+// console.dir(Student.prototype.constructor);
