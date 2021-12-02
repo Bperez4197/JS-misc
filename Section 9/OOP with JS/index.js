@@ -34,11 +34,25 @@ Person.prototype.calcAge = function () {
   console.log(2037 - this.birthYear);
 };
 
-bryce.calcAge();
-// console.log(bryce.__proto__);
+// bryce.calcAge();
+// console.log(bryce.__proto__.__proto__);
 // console.log(Person.prototype.isPrototypeOf(bryce));
 
 //The prototype has the property, not the object, so under proto the property will be listed on the object but if you run hasOwnProperty for a prototypcal property it will return false.
 Person.prototype.species = "Homo Sapiens";
-console.log(bryce.species, matilda.species);
-console.log(bryce.hasOwnProperty("species"));
+// console.log(bryce.species, matilda.species);
+// console.log(bryce.hasOwnProperty("species"));
+// console.dir(Person.prototype.constructor);
+
+// const arr = [3, 6, 4, 7, 2, 9, 4, 6, 3, 7];
+// console.log(arr.__proto__.__proto__);
+// console.log(arr.__proto__ === Array.prototype);
+
+// Array.prototype.unique = function () {
+//   return [...new Set(this)];
+// };
+
+// console.log(arr.unique());
+
+// const h1 = document.querySelector("h1");
+// console.dir(h1);
