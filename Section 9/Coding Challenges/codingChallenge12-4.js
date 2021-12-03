@@ -43,14 +43,31 @@ class EVCl extends Car {
 
   accelerate() {
     this.speed += 20;
-    this.#charge -= 10;
+    this.#charge -= 1;
+    console.log(
+      `${this.make} going ${this.speed} km/h with a charge of ${this.#charge}%`
+    );
     return this;
   }
 
   brake() {
     this.speed -= 5;
+    console.log(
+      `${this.make} going ${this.speed} km/h with a charge of ${this.#charge}%`
+    );
     return this;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
   }
 }
 
 const myElectric = new EVCl("Rivian", 120, 23);
+
+console.log(myElectric);
+// console.log(myElectric.#charge);
+myElectric.accelerate();
+myElectric.brake();
+myElectric.chargeBattery(90);
+console.log(myElectric);

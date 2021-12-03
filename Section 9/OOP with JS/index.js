@@ -318,5 +318,6 @@ Account.helper();
 /////////////////////// Encapsulation Added Above //////////////////////////////////////////////////
 
 ////////////////////////////////Chaining Methods //////////////////////////
+// To do this, methods that set a value should return "this", otherwise the chained method will be called on "undefined"
 acc1.deposit(200).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
 console.log(acc1.getMovements());
