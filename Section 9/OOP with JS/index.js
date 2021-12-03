@@ -218,6 +218,105 @@ class StudentCl extends PersonCl {
 // const martha = new StudentCl("Martha Jones", 2012);
 // console.log(martha);
 const martha = new StudentCl("Martha Jones", 2012, "Computer Science");
-console.log(martha);
-martha.introduce();
-martha.calcAge();
+// console.log(martha);
+// martha.introduce();
+// martha.calcAge();
+
+// Inheritance with Object.create ///////////////////////////////////////////////////////////////////////////////////////
+// Linking objects together rather than faking classes
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init("Jay", 2010, "Computer Science");
+// jay.introduce();
+// jay.calcAge();
+
+// Public fields
+// Private fields
+// Public Methods
+// Private Methods
+// there is also a static option
+
+///// Another Class ////////////////////////////////////////////////////////////////////////////
+//// This example shows why we need encapsulation ////////////////////////////////
+// Protected Property // add _ in front of variable like _pin
+class Account {
+  // Public fields (Put on instances)
+  locale = navigator.language;
+
+  //private fields
+  #movements = [];
+  #pin;
+
+  // Must not be in constructor, so they work more like normal classes
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+  }
+
+  // Public interface of our objects ////////////////////////////////////////////////////
+  // Public methods //
+  // (Put on prototype)
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(value) {
+    this.#movements.push(value);
+    return this;
+  }
+
+  withdraw(value) {
+    this.#movements.push(-value);
+    return this;
+  }
+
+  requestLoan(value) {
+    if (this.#approveLoan) {
+      this.deposit(value);
+      console.log("Loan Approved!");
+    }
+    return this;
+  }
+
+  static helper() {
+    console.log("static helper function");
+  }
+
+  // Private Methods /////////////////////////////
+  #approveLoan(value) {
+    return true;
+  }
+}
+
+const acc1 = new Account("Bryce", "Eur", 1111);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+
+// // Now cannot access //
+// console.log(acc1.#movements);
+// console.log(acc1.#pin);
+// console.log(acc1.#approveLoan());
+console.log(acc1);
+Account.helper();
+
+/////////////////////// Encapsulation Added Above //////////////////////////////////////////////////
+
+////////////////////////////////Chaining Methods //////////////////////////
+acc1.deposit(200).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
