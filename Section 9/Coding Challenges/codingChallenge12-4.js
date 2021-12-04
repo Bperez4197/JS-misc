@@ -67,7 +67,5 @@ const myElectric = new EVCl("Rivian", 120, 23);
 
 console.log(myElectric);
 // console.log(myElectric.#charge);
-myElectric.accelerate();
-myElectric.brake();
-myElectric.chargeBattery(90);
+myElectric.accelerate().brake().chargeBattery(90);
 console.log(myElectric);
