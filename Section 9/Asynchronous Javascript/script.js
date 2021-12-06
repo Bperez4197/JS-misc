@@ -7,6 +7,7 @@ const countriesContainer = document.querySelector(".countries");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // old way of doing it XML style ///////////////////////////////////////////////////////////////////////
+////// Events and callbacks //////////////////////////////////////////////////////////////////
 // const getCountryData = function (country) {
 //   const request = new XMLHttpRequest();
 //   request.open("GET", `https://restcountries.com/v2/name/${country}`);
@@ -95,4 +96,39 @@ const getCountryAndNeighbor = function (country) {
 };
 
 // getCountryAndNeighbor("portugal");
-getCountryAndNeighbor("usa");
+// getCountryAndNeighbor("usa");
+
+///////////////////////////////Promises and the Fetch API //////////////////////////////////////////////////
+////////////// A promise is a placeholder for a future value /////////////////////////////////////////////
+const request = fetch("https://restcountries.com/v2/name/portugal");
+// console.log(request);
+
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0]);
+//     });
+// };
+
+// Cleaned up version, otherwise the same /////////////////////
+const getCountryData = function (country) {
+  // Country 1
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((response) => response.json())
+    .then((data) => {
+      renderCountry(data[0]);
+      const neighbor = data[0].borders[0];
+      if (!neighbor) return;
+      // Country 2
+      return fetch(`https://restcountries.com/v2/alpha/${neighbor}`);
+    })
+    .then((response) => response.json())
+    .then((data) => renderCountry(data, "neighbour"));
+};
+
+getCountryData("portugal");
