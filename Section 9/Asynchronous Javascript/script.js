@@ -62,7 +62,12 @@ const renderCountry = function (data, className = "") {
         </article>`;
 
   countriesContainer.insertAdjacentHTML("beforeend", html);
-  countriesContainer.style.opacity = 1;
+  //   countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText("beforeend", msg);
+  //   countriesContainer.style.opacity = 1;
 };
 
 const getCountryAndNeighbor = function (country) {
@@ -100,6 +105,7 @@ const getCountryAndNeighbor = function (country) {
 
 ///////////////////////////////Promises and the Fetch API //////////////////////////////////////////////////
 ////////////// A promise is a placeholder for a future value /////////////////////////////////////////////
+/////// This allows us not to have callbacks inside of callbacks //////////////////////////////////////////
 const request = fetch("https://restcountries.com/v2/name/portugal");
 // console.log(request);
 
@@ -128,7 +134,14 @@ const getCountryData = function (country) {
       return fetch(`https://restcountries.com/v2/alpha/${neighbor}`);
     })
     .then((response) => response.json())
-    .then((data) => renderCountry(data, "neighbour"));
+    .then((data) => renderCountry(data, "neighbour"))
+    .catch((err) => {
+      console.err(`${err}`);
+      renderError(`Something went wrong! ${err.message}`);
+    })
+    .finally(() => (countriesContainer.style.opacity = 1));
 };
 
-getCountryData("portugal");
+btn.addEventListener("click", function () {
+  getCountryData("portugal");
+});
