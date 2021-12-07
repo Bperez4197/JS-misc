@@ -186,10 +186,12 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener("click", function () {
-  //   getCountryData("usa");
-  whereAmI(19.037, 72.873);
+  getCountryData("usa");
+  whereAmI(-33.933, 18.474);
 });
 
+///// Using one api to fetch data to use for another api ///////////////////////////////////////////////
+////////////////////////////////Coding Challenge 1 ///////////////////////
 function whereAmI(lat, lng) {
   return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then((response) => {
@@ -217,6 +219,18 @@ function whereAmI(lat, lng) {
     .catch((error) => console.error(error.message));
 }
 
-whereAmI(52.508, 13.381);
+// whereAmI(52.508, 13.381);
 // whereAmI(19.037, 72.873);
 // whereAmI(-33.933, 18.474);
+
+///// The event loop in practice ////////////////////////////////////////////////////////////////////////////
+//////////////////// The microtask queue(promises) has priority over the callback queue(other callbacks) ////
+console.log("Test start");
+setTimeout(() => console.log("0 second timer"), 0);
+Promise.resolve("Resolved promise 1").then((res) => {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log(res);
+});
+
+Promise.resolve("Resolved promise 2").then((res) => console.log(res));
+console.log("Test end");
