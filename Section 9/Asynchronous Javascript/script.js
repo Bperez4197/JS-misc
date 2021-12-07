@@ -186,16 +186,19 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener("click", function () {
-  getCountryData("usa");
-  whereAmI(-33.933, 18.474);
+  //   getCountryData("usa");
+  //   whereAmI(-33.933, 18.474);
 });
 
 ///// Using one api to fetch data to use for another api ///////////////////////////////////////////////
 ////////////////////////////////Coding Challenge 1 ///////////////////////
-function whereAmI(lat, lng) {
-  return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+function whereAmI() {
+  getPosition()
+    .then((pos) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    })
     .then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw new Error(
           `You made more than 3 requests in 5 seconds. Please wait to send another request`
@@ -269,3 +272,23 @@ function whereAmI(lat, lng) {
 // make promised that instantly resolve or reject ///////////////////////////
 // Promise.resolve("resolved value").then((res) => console.log(res));
 // Promise.reject(new Error("rejected value")).catch((err) => console.log(err));
+
+//////////////////// Promisifying geoloaction api ///////////////////////////////////////////////////////////////
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => {
+    //     resolve(position);
+    //   },
+    //   (err) => reject(err)
+    // );
+
+    /// Same as above //////
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// getPosition().then((pos) => console.log(pos));
+
+btn.addEventListener("click", whereAmI);
