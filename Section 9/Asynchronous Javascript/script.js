@@ -296,40 +296,59 @@ const getPosition = function () {
 btn.addEventListener("click", whereAmI);
 
 //////////////////// Coding Challenge 2 //////////////////////////////////////////////////////////////
-const imgContainer = document.querySelector(".images");
+// const imgContainer = document.querySelector(".images");
 
-const createImage = function (imgPath) {
-  return new Promise(function (resolve, reject) {
-    const image = document.createElement("img");
-    image.src = imgPath;
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const image = document.createElement("img");
+//     image.src = imgPath;
 
-    image.addEventListener("load", function () {
-      imgContainer.append(image);
-      resolve(image);
-    });
+//     image.addEventListener("load", function () {
+//       imgContainer.append(image);
+//       resolve(image);
+//     });
 
-    image.addEventListener("error", function () {
-      reject(new Error("Image not found"));
-    });
-  });
+//     image.addEventListener("error", function () {
+//       reject(new Error("Image not found"));
+//     });
+//   });
+// };
+
+// let currentImage;
+
+// createImage("./img/img-1.jpg")
+//   .then((img) => {
+//     currentImage = img;
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImage.style.display = "none";
+//     return createImage("./img/img-2.jpg");
+//   })
+//   .then((img) => {
+//     currentImage = img;
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImage.style.display = "none";
+//   })
+//   .catch((err) => console.error(err));
+
+////////////////////////////////////////////// ASYNC AWAIT //////////////////////////////////////////
+///////////////////////// About consuming Promises //////////////////////////
+///// syntactic sugar over all the then chains /////////////////////////////////////////////////////
+const whereAmI2 = async function () {
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await resGeo.json();
+
+  const res = await fetch(
+    `https://restcountries.com/v2/name/${dataGeo.country}`
+  );
+  const data = await res.json();
+  renderCountry(data[0]);
 };
 
-let currentImage;
-
-createImage("./img/img-1.jpg")
-  .then((img) => {
-    currentImage = img;
-    return wait(2);
-  })
-  .then(() => {
-    currentImage.style.display = "none";
-    return createImage("./img/img-2.jpg");
-  })
-  .then((img) => {
-    currentImage = img;
-    return wait(2);
-  })
-  .then(() => {
-    currentImage.style.display = "none";
-  })
-  .catch((err) => console.error(err));
+whereAmI2();
+console.log("FIRST");
