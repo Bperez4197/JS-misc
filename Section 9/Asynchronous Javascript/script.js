@@ -352,11 +352,33 @@ const whereAmI2 = async function () {
     if (!res.ok) throw new Error("Problem getting country");
     const data = await res.json();
     renderCountry(data[0]);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.country}.`;
   } catch (err) {
     console.error(err);
     renderError(`Something went wrong ${err.message}`);
+
+    // Reject promise returned from async function
+    throw err;
   }
 };
 
-whereAmI2();
-console.log("FIRST");
+// console.log("1: will get location");
+//// const city = whereAmI2();
+//// console.log(city);
+// whereAmI2()
+//   .then((city) => console.log(city))
+//   .catch((err) => console.error(err.message))
+//   .finally(() => console.log("3: finished getting location"));
+
+// Return data from an async function //////////////////////////////////////////////////////////////////
+(async function () {
+  try {
+    const city = await whereAmI2();
+    console.log(city);
+  } catch (err) {
+    console.error(`2: ${err.message}`);
+  }
+
+  console.log("3: finished getting location");
+})();
