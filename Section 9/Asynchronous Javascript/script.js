@@ -225,12 +225,47 @@ function whereAmI(lat, lng) {
 
 ///// The event loop in practice ////////////////////////////////////////////////////////////////////////////
 //////////////////// The microtask queue(promises) has priority over the callback queue(other callbacks) ////
-console.log("Test start");
-setTimeout(() => console.log("0 second timer"), 0);
-Promise.resolve("Resolved promise 1").then((res) => {
-  for (let i = 0; i < 1000000000; i++) {}
-  console.log(res);
-});
+// console.log("Test start");
+// setTimeout(() => console.log("0 second timer"), 0);
+// Promise.resolve("Resolved promise 1").then((res) => {
+//   for (let i = 0; i < 1000000000; i++) {}
+//   console.log(res);
+// });
 
-Promise.resolve("Resolved promise 2").then((res) => console.log(res));
-console.log("Test end");
+// Promise.resolve("Resolved promise 2").then((res) => console.log(res));
+// console.log("Test end");
+
+//// Building Promises //////////////////////////////////////////////////////////////////////////
+
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log("Lotter is happening");
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       resolve("You WIN!");
+//     } else {
+//       reject(new Error("You lost your money! :("));
+//     }
+//   }, 2000);
+// });
+
+// lotteryPromise
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err.message));
+
+///// Promisifying setTimeout //////////////////////////////////////////////////////////////////////////
+// const wait = function (sec) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, sec * 1000);
+//   });
+// };
+
+// wait(2)
+//   .then(() => {
+//     console.log("I waited for two seconds");
+//     return wait(1);
+//   })
+//   .then(() => console.log("I waited for one second"));
+
+// make promised that instantly resolve or reject ///////////////////////////
+// Promise.resolve("resolved value").then((res) => console.log(res));
+// Promise.reject(new Error("rejected value")).catch((err) => console.log(err));
