@@ -196,6 +196,7 @@ function whereAmI() {
   getPosition()
     .then((pos) => {
       const { latitude: lat, longitude: lng } = pos.coords;
+      /// api 1
       return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
     })
     .then((response) => {
@@ -209,6 +210,7 @@ function whereAmI() {
     })
     .then((data) => {
       console.log(`You are in ${data.city},${data.country}.`);
+      /// api 2
       return fetch(`https://restcountries.com/v2/name/${data.country}`);
     })
     .then((response) => {
@@ -256,11 +258,11 @@ function whereAmI() {
 //   .catch((err) => console.error(err.message));
 
 ///// Promisifying setTimeout //////////////////////////////////////////////////////////////////////////
-// const wait = function (sec) {
-//   return new Promise(function (resolve) {
-//     setTimeout(resolve, sec * 1000);
-//   });
-// };
+const wait = function (sec) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, sec * 1000);
+  });
+};
 
 // wait(2)
 //   .then(() => {
@@ -292,3 +294,42 @@ const getPosition = function () {
 // getPosition().then((pos) => console.log(pos));
 
 btn.addEventListener("click", whereAmI);
+
+//////////////////// Coding Challenge 2 //////////////////////////////////////////////////////////////
+const imgContainer = document.querySelector(".images");
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const image = document.createElement("img");
+    image.src = imgPath;
+
+    image.addEventListener("load", function () {
+      imgContainer.append(image);
+      resolve(image);
+    });
+
+    image.addEventListener("error", function () {
+      reject(new Error("Image not found"));
+    });
+  });
+};
+
+let currentImage;
+
+createImage("./img/img-1.jpg")
+  .then((img) => {
+    currentImage = img;
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+    return createImage("./img/img-2.jpg");
+  })
+  .then((img) => {
+    currentImage = img;
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+  })
+  .catch((err) => console.error(err));
