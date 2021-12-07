@@ -375,10 +375,32 @@ const whereAmI2 = async function () {
 (async function () {
   try {
     const city = await whereAmI2();
-    console.log(city);
+    console.log(`2: ${city}`);
   } catch (err) {
     console.error(`2: ${err.message}`);
   }
 
   console.log("3: finished getting location");
 })();
+
+//////////////////////////// Running Promises in Parallel ////////////////////////////////////////////////////////
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    // const [country1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
+    // const [country2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
+    // const [country3] = await getJSON(`https://restcountries.com/v2/name/${c3}`);
+
+    // Promise.all() takes an array of promises and runs them all at the same time and returns an array ///////////
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v2/name/${c1}`),
+      getJSON(`https://restcountries.com/v2/name/${c2}`),
+      getJSON(`https://restcountries.com/v2/name/${c3}`),
+    ]);
+
+    console.log(data.map((d) => d[0].capital));
+  } catch (err) {
+    console.error(err);
+  }
+};
+get3Countries("portugal", "canada", "tanzania");
