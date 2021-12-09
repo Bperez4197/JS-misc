@@ -19,7 +19,7 @@
 // console.log(ShoppingCart.totalPrice);
 
 // Importing default /////
-import add, { cart } from "./shoppingCart.js";
+// import add, { cart } from "./shoppingCart.js";
 // add("pizza", 2);
 // console.log(cart);
 
@@ -86,3 +86,25 @@ import add, { cart } from "./shoppingCart.js";
 //     cart.push(product, quantity);
 //     console.log(`${quantity} ${product} ordered from stock.`);
 //   };
+
+////// NPM and Modules //////////////////////////////////////////////////////////////
+/////////////////// Lodash has a bunch of useful functions for arrays, objects, numbers, and string /////
+
+import cloneDeep from "./node_modules/lodash-es/cloneDeep.js";
+
+const state = {
+  cart: [
+    { product: "bread", quantity: 5 },
+    { product: "pizza", quantity: 2 },
+  ],
+  user: { loggedIn: true },
+};
+
+// const stateClone = Object.assign({}, state);
+// state.user.loggedIn = false;
+// console.log(stateClone);
+
+const stateDeepClone = cloneDeep(state);
+console.log(stateDeepClone);
+
+/// Don't include node modules folder in git pushes... npm i will reach into the package.json folder and download the dependencies //////////
