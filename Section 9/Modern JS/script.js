@@ -12,7 +12,7 @@
 // console.log(qt);
 
 // Importing everything from a file /////
-// import * as ShoppingCart from "./shoppingCart.js";
+import * as ShoppingCart from "./shoppingCart.js";
 
 // console.log("importing module");
 // ShoppingCart.addToCart("bread", 3);
@@ -107,4 +107,6 @@ const state = {
 const stateDeepClone = cloneDeep(state);
 console.log(stateDeepClone);
 
-/// Don't include node modules folder in git pushes... npm i will reach into the package.json folder and download the dependencies //////////
+if (module.hot) {
+  module.hot.accept();
+}
