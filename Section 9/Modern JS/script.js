@@ -49,33 +49,40 @@ import add, { cart } from "./shoppingCart.js";
 // const lastPost2 = await getLastPost();
 // console.log(lastPost2);
 
-/// Module Pattern /////////////////////////////////////////////////////////////////
-const ShoppingCart2 = (function () {
-  const cart = [];
-  const shippingCost = 10;
-  const totalPrice = 237;
-  const totalQuantity = 23;
+// /// Module Pattern /////////////////////////////////////////////////////////////////
+// const ShoppingCart2 = (function () {
+//   const cart = [];
+//   const shippingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 23;
 
-  const addtoCart = function (product, quantity) {
-    cart.push(product, quantity);
-    console.log(`${quantity} ${product} ordered from stock.`);
-  };
+//   const addtoCart = function (product, quantity) {
+//     cart.push(product, quantity);
+//     console.log(`${quantity} ${product} ordered from stock.`);
+//   };
 
-  const orderStock = function (product, quantity) {
-    cart.push(product, quantity);
-    console.log(`${quantity} ${product} ordered from stock.`);
-  };
+//   const orderStock = function (product, quantity) {
+//     cart.push(product, quantity);
+//     console.log(`${quantity} ${product} ordered from stock.`);
+//   };
 
-  return {
-    addtoCart,
-    cart,
-    totalPrice,
-    totalQuantity,
-  };
-})();
+//   return {
+//     addtoCart,
+//     cart,
+//     totalPrice,
+//     totalQuantity,
+//   };
+// })();
 
-ShoppingCart2.addtoCart("apple", 4);
-ShoppingCart2.addtoCart("pizza", 2);
-console.log(ShoppingCart2);
-// shipping cost stays private
-console.log(ShoppingCart2.shippingCost);
+// ShoppingCart2.addtoCart("apple", 4);
+// ShoppingCart2.addtoCart("pizza", 2);
+// console.log(ShoppingCart2);
+// // shipping cost stays private
+// console.log(ShoppingCart2.shippingCost);
+
+///// CommonJS Modules /////////////////////////////////////////////////////////////////
+// Doesn't work here, but would work with Node.js ///////
+// export.addToCart = function (product, quantity) {
+//     cart.push(product, quantity);
+//     console.log(`${quantity} ${product} ordered from stock.`);
+//   };
