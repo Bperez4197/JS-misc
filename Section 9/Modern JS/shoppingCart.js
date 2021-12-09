@@ -1,6 +1,11 @@
 // Exporting Module
 console.log("exporting module");
 
+// // Blocking code
+// console.log("Start Fetching users...");
+// await fetch("https://jsonplaceholder.typicode.com/users");
+// console.log("Finished Fetching users...");
+
 const shippingCost = 10;
 const cart = [];
 
