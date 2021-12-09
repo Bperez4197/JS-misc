@@ -107,6 +107,7 @@ const state = {
 const stateDeepClone = cloneDeep(state);
 console.log(stateDeepClone);
 
-if (module.hot) {
-  module.hot.accept();
-}
+/// deals with module priority //
+// if (module.hot) {
+//   module.hot.accept();
+// }
