@@ -32,19 +32,50 @@ import add, { cart } from "./shoppingCart.js";
 // console.log(data);
 // console.log("something");
 
-// Async functions always return a promise //////////////////////////
-const getLastPost = async function () {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await res.json();
-  console.log(data);
+// // Async functions always return a promise //////////////////////////
+// const getLastPost = async function () {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//   const data = await res.json();
+//   console.log(data);
 
-  return { title: data.at(-1).title, text: data.at(-1).body };
-};
+//   return { title: data.at(-1).title, text: data.at(-1).body };
+// };
 
-const lastPost = getLastPost();
+// const lastPost = getLastPost();
 
-// // Not very clean
-// lastPost.then((last) => console.log(last));
+// // // Not very clean
+// // lastPost.then((last) => console.log(last));
 
-const lastPost2 = await getLastPost();
-console.log(lastPost2);
+// const lastPost2 = await getLastPost();
+// console.log(lastPost2);
+
+/// Module Pattern /////////////////////////////////////////////////////////////////
+const ShoppingCart2 = (function () {
+  const cart = [];
+  const shippingCost = 10;
+  const totalPrice = 237;
+  const totalQuantity = 23;
+
+  const addtoCart = function (product, quantity) {
+    cart.push(product, quantity);
+    console.log(`${quantity} ${product} ordered from stock.`);
+  };
+
+  const orderStock = function (product, quantity) {
+    cart.push(product, quantity);
+    console.log(`${quantity} ${product} ordered from stock.`);
+  };
+
+  return {
+    addtoCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+  };
+})();
+
+ShoppingCart2.addtoCart("apple", 4);
+ShoppingCart2.addtoCart("pizza", 2);
+console.log(ShoppingCart2);
+// shipping cost stays private
+console.log(ShoppingCart2.shippingCost);
